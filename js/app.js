@@ -130,6 +130,15 @@ async function saveRecipe() {
         return;
     }
 
+    // === MODIFIED 20260426 ===
+    // PREVENT DOUBLE-CLICKS ON SAVE BY DISABLING
+    // BUTTON WHEN 'Save Recipe' IS CLICKED AND CHANGING
+    // BUTTON LABEL TO 'Saving...'
+    const btn = document.querySelector('.btn-primary');
+    btn.disabled = true;
+    btn.textContent = 'Saving...';
+    // === MODIFIED STOP ===
+
     const payload = {
         name:         name,
         category:     document.getElementById('f-category').value,
@@ -155,8 +164,17 @@ async function saveRecipe() {
         const id = isEdit ? currentRecipe.id : json.id;
         await viewRecipe(id);
     } catch (e) {
+
+        // === MODIFIED 20260426 ===
+        // # IF THERE IS AN ISSUE WITH THE CONTENT PREVENTING 
+        // A SAVE THEN RE-ENABLE THE SAVE BUTTON
+        btn.disabled = false;
+        btn.textContent = 'Save Recipe';
+        // === MODIFIED STOP ===
+        
         alert('Could not save recipe.');
         console.error(e);
+        
     }
 }
 
