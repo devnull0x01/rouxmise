@@ -160,7 +160,10 @@ function renderRecipeDetail(r) {
 
 // ── Add / Edit Form ────────────────────────────────────────
 function setupForm(recipe) {
-    document.getElementById('form-title').textContent = recipe ? 'Edit Recipe' : 'Add Recipe';
+const btn = document.querySelector('.btn-primary');
+    btn.disabled = false;
+    btn.textContent = 'Save Recipe';
+    document.getElementById('form-title').textContent = recipe ? 'Edit Recipe' : 'Add Recipe';    
     document.getElementById('f-name').value         = recipe ? recipe.name         : '';
     document.getElementById('f-category').value     = recipe ? recipe.category     : 'Dinner';
     document.getElementById('f-servings').value     = recipe ? recipe.servings     : '';
