@@ -15,3 +15,6 @@ A self-hosted recipe manager. Enter, edit, delete, search, and print recipe card
 
 ## Setup
 Clone into your web root and point Nginx at the directory. The database is auto-created on first run.
+
+## Status
+v1.0 - fully functional.  Deployed on a Raspberry Pi 4 running Nginx + PHP 8.4 + SQLite.
