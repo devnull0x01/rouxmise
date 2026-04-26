@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rouxmise</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <h1 class="logo" onclick="showView('browse')">Rouxmise</h1>
+            <nav>
+                <button onclick="showView('browse')">Browse</button>
+                <button onclick="showView('add')">Add Recipe</button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="app">
+
+        <!-- BROWSE VIEW -->
+        <div id="view-browse" class="view">
+            <div class="browse-controls">
+                <input type="text" id="search-input" placeholder="Search recipes..." oninput="handleSearch()">
+                <select id="category-filter" onchange="handleSearch()">
+                    <option value="">All Categories</option>
+                    <option>Breakfast</option>
+                    <option>Lunch</option>
+                    <option>Dinner</option>
+                    <option>Dessert</option>
+                    <option>Snack</option>
+                    <option>Drink</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div id="recipe-grid" class="recipe-grid"></div>
+        </div>
+
+        <!-- VIEW RECIPE -->
+        <div id="view-recipe" class="view hidden">
+            <div class="recipe-actions">
+                <button onclick="showView('browse')">← Back</button>
+                <button onclick="editCurrentRecipe()">Edit</button>
+                <button onclick="deleteCurrentRecipe()" class="btn-danger">Delete</button>
+                <button onclick="showShoppingList()">Shopping List</button>
+                <button onclick="printCard()">Print Card</button>
+            </div>
+            <div id="recipe-detail"></div>
+        </div>
+
+        <!-- ADD / EDIT VIEW -->
+        <div id="view-form" class="view hidden">
+            <div class="form-container">
+                <h2 id="form-title">Add Recipe</h2>
+                <div class="form-group">
+                    <label for="f-name">Recipe Name *</label>
+                    <input type="text" id="f-name" placeholder="e.g. Chicken Tikka Masala">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="f-category">Category</label>
+                        <select id="f-category">
+                            <option>Breakfast</option>
+                            <option>Lunch</option>
+                            <option>Dinner</option>
+                            <option>Dessert</option>
+                            <option>Snack</option>
+                            <option>Drink</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="f-servings">Servings</label>
+                        <input type="text" id="f-servings" placeholder="e.g. 4 servings">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="f-ingredients">Ingredients <span class="hint">(one per line)</span></label>
+                    <textarea id="f-ingredients" rows="10" placeholder="2 cups flour&#10;1 tsp salt&#10;3 eggs"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="f-instructions">Instructions</label>
+                    <textarea id="f-instructions" rows="12" placeholder="1. Preheat oven to 350°F&#10;2. Mix dry ingredients..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="f-notes">Notes <span class="hint">(optional)</span></label>
+                    <textarea id="f-notes" rows="4" placeholder="Doubles well, freezes great..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button onclick="showView('browse')" class="btn-secondary">Cancel</button>
+                    <button onclick="saveRecipe()" class="btn-primary">Save Recipe</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SHOPPING LIST VIEW -->
+        <div id="view-shopping" class="view hidden">
+            <div class="recipe-actions">
+                <button onclick="showView('recipe')">← Back to Recipe</button>
+                <button onclick="window.print()">Print List</button>
+            </div>
+            <div id="shopping-content"></div>
+        </div>
+
+    </main>
+
+    <!-- PRINT CARD (hidden, shown only on print) -->
+    <div id="print-card" class="hidden"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

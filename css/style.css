@@ -1,0 +1,494 @@
+/* ── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg:           #1a1a1a;
+    --surface:      #242424;
+    --surface2:     #2e2e2e;
+    --border:       #3a3a3a;
+    --accent:       #c8a96e;
+    --accent-dark:  #a8893e;
+    --danger:       #c0392b;
+    --danger-dark:  #a93226;
+    --text:         #e8e8e8;
+    --text-muted:   #888;
+    --radius:       8px;
+    --shadow:       0 2px 8px rgba(0,0,0,0.4);
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Georgia', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+header {
+    background: var(--surface);
+    border-bottom: 2px solid var(--accent);
+    padding: 0 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+}
+
+.logo {
+    font-size: 1.6rem;
+    color: var(--accent);
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    user-select: none;
+}
+
+nav {
+    display: flex;
+    gap: 0.75rem;
+}
+
+nav button {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+nav button:hover {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+/* ── Main & Views ─────────────────────────────────────────── */
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.view { display: block; }
+.hidden { display: none !important; }
+
+/* ── Browse Controls ──────────────────────────────────────── */
+.browse-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.browse-controls input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.browse-controls select {
+    min-width: 160px;
+}
+
+/* ── Inputs & Selects ─────────────────────────────────────── */
+input[type="text"],
+select,
+textarea {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: var(--radius);
+    padding: 0.6rem 0.9rem;
+    font-size: 1rem;
+    font-family: inherit;
+    width: 100%;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+textarea {
+    resize: vertical;
+    line-height: 1.7;
+}
+
+/* ── Recipe Grid ──────────────────────────────────────────── */
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+.recipe-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+    box-shadow: var(--shadow);
+}
+
+.recipe-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.recipe-card h3 {
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+    font-size: 1.1rem;
+}
+
+.recipe-card .meta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.empty-state {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 4rem 1rem;
+    font-size: 1.1rem;
+    grid-column: 1 / -1;
+}
+
+/* ── Recipe Detail ────────────────────────────────────────── */
+.recipe-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.recipe-actions button {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.5rem 1.1rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.recipe-actions button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.recipe-actions .btn-danger {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.recipe-actions .btn-danger:hover {
+    background: var(--danger);
+    color: white;
+}
+
+.recipe-detail-inner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.recipe-detail-inner h2 {
+    color: var(--accent);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.recipe-meta {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.recipe-section {
+    margin-bottom: 1.75rem;
+}
+
+.recipe-section h3 {
+    color: var(--accent);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+}
+
+.ingredients-list {
+    list-style: none;
+    padding: 0;
+}
+
+.ingredients-list li {
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 1rem;
+}
+
+.ingredients-list li:last-child {
+    border-bottom: none;
+}
+
+.instructions-text {
+    white-space: pre-wrap;
+    line-height: 1.8;
+}
+
+.notes-text {
+    white-space: pre-wrap;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ── Form ─────────────────────────────────────────────────── */
+.form-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.form-container h2 {
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.hint {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover {
+    background: var(--accent-dark);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 0.6rem 1.5rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-secondary:hover {
+    border-color: var(--text-muted);
+    color: var(--text);
+}
+
+/* ── Shopping List ────────────────────────────────────────── */
+.shopping-content {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+}
+
+.shopping-content h2 {
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.shopping-content .sub {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.shopping-list {
+    list-style: none;
+    padding: 0;
+}
+
+.shopping-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 1.05rem;
+    cursor: pointer;
+}
+
+.shopping-list li:last-child {
+    border-bottom: none;
+}
+
+.shopping-list li input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+}
+
+.shopping-list li.checked span {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .header-inner { height: auto; padding: 0.75rem 0; flex-direction: column; gap: 0.5rem; }
+    .logo { font-size: 1.3rem; }
+    nav button { padding: 0.4rem 0.75rem; font-size: 0.85rem; }
+    main { padding: 1rem; }
+    .form-row { flex-direction: column; }
+    .recipe-grid { grid-template-columns: 1fr; }
+    .recipe-detail-inner { padding: 1.25rem; }
+    .form-container { padding: 1.25rem; }
+    .recipe-actions { gap: 0.5rem; }
+    .recipe-actions button { font-size: 0.85rem; padding: 0.4rem 0.75rem; }
+}
+
+/* ── Print Styles ─────────────────────────────────────────── */
+@media print {
+    header, #app { display: none !important; }
+    #print-card { display: block !important; }
+
+    body {
+        background: white;
+        color: black;
+        font-family: Georgia, serif;
+    }
+
+    .print-card-inner {
+        width: 100%;
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 1.5rem;
+        border: 3px double #8b6914;
+    }
+
+    .print-card-inner h2 {
+        font-size: 1.8rem;
+        color: #5a3e00;
+        border-bottom: 2px solid #8b6914;
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .print-meta {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 1rem;
+    }
+
+    .print-section-title {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #8b6914;
+        margin: 1rem 0 0.4rem;
+    }
+
+    .print-ingredients {
+        list-style: none;
+        padding: 0;
+        columns: 2;
+        column-gap: 2rem;
+    }
+
+    .print-ingredients li {
+        font-size: 0.9rem;
+        padding: 0.2rem 0;
+        border-bottom: 1px dotted #ccc;
+        break-inside: avoid;
+    }
+
+    .print-instructions {
+        font-size: 0.9rem;
+        white-space: pre-wrap;
+        line-height: 1.7;
+    }
+
+    .print-notes {
+        font-size: 0.85rem;
+        font-style: italic;
+        color: #555;
+        white-space: pre-wrap;
+        margin-top: 0.5rem;
+    }
+
+    .print-footer {
+        margin-top: 1.5rem;
+        text-align: right;
+        font-size: 0.75rem;
+        color: #999;
+        border-top: 1px solid #ccc;
+        padding-top: 0.5rem;
+    }
+}
