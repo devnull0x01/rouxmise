@@ -4,10 +4,39 @@ let currentRecipe = null;
 let searchTimer   = null;
 
 // ── Init ───────────────────────────────────────────────────
+// === MODIFIED 20260426 ===
+// LISTEN FOR A CHANGE IN STATE
+//document.addEventListener('DOMContentLoaded', () => {
+//    loadRecipes();
+//});
 document.addEventListener('DOMContentLoaded', () => {
     loadRecipes();
+
+    window.addEventListener('popstate', async (e) => {
+        if (!e.state) {
+            showView('browse', false);
+            return;
+        }
+        const { view, recipeId } = e.state;
+        if (view === 'recipe' && recipeId) {
+            await viewRecipe(recipeId);
+            showView('recipe', false);
+        } else if (view === 'form') {
+            currentRecipe = null;
+            setupForm(null);
+            showView('form', false);
+        } else {
+            showView('browse', false);
+        }
+    });
 });
 
+// === MODIFIED 20260426 ===
+// PUSH BROWSER STATE TO BROWSER HISTORY SO THAT
+// WHEN THE BACK BUTTON IS PRESSED THE PREVIOUS BROWSER
+// STATE IS LOADED
+
+/*
 // ── View Management ────────────────────────────────────────
 function showView(name) {
     document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
@@ -20,7 +49,22 @@ function showView(name) {
     // 'isEdit' WON'T EQUAL TRUE
     //if (name === 'form')    setupForm(null);
     if (name === 'form') { currentRecipe = null; setupForm(null); }
+}
+*/
 
+// === MODIFIED STOP ===
+
+function showView(name, pushState = true) {
+    document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
+    document.getElementById('view-' + name).classList.remove('hidden');
+
+    if (name === 'browse') loadRecipes();
+    if (name === 'form') { currentRecipe = null; setupForm(null); }
+
+    if (pushState) {
+        const state = { view: name, recipeId: currentRecipe ? currentRecipe.id : null };
+        history.pushState(state, '', `#${name}`);
+    }
 }
 
 // ── Browse / Search ────────────────────────────────────────
@@ -68,8 +112,17 @@ async function viewRecipe(id) {
         const json = await res.json();
         if (!json.success) throw new Error(json.error);
         currentRecipe = json.data;
+
+        // === MODIFIED 20260426 ===
+        // INCLUDE THE ID IN THE HISTORY STATE
+        // AND THEN PUSH BROWSER STATE
+        //renderRecipeDetail(currentRecipe);
+        //showView('recipe');
         renderRecipeDetail(currentRecipe);
-        showView('recipe');
+        showView('recipe', false);
+        history.pushState({ view: 'recipe', recipeId: currentRecipe.id }, '', `#recipe-${currentRecipe.id}`);
+        // === MODIFIED STOP ===
+
     } catch (e) {
         alert('Could not load recipe.');
         console.error(e);
@@ -171,7 +224,7 @@ async function saveRecipe() {
         btn.disabled = false;
         btn.textContent = 'Save Recipe';
         // === MODIFIED STOP ===
-        
+
         alert('Could not save recipe.');
         console.error(e);
         
