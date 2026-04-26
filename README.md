@@ -1,0 +1,17 @@
+# Rouxmise
+
+A self-hosted recipe manager. Enter, edit, delete, search, and print recipe cards.
+
+## Stack
+- PHP 8.4 + SQLite
+- Vanilla HTML/CSS/JS (fully responsive)
+- Nginx
+
+## Features
+- Add, edit, delete recipes
+- Full-text search across all fields
+- Generate shopping lists from ingredients
+- Print recipe cards for lamination
+
+## Setup
+Clone into your web root and point Nginx at the directory. The database is auto-created on first run.

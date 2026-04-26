@@ -1,0 +1,12 @@
+# SQLite database - never commit Steven's recipes
+data/*.db
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor cruft
+*.swp
+*.swo
+.vscode/
+.idea/
