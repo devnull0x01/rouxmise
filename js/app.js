@@ -14,7 +14,7 @@ function showView(name) {
     document.getElementById('view-' + name).classList.remove('hidden');
 
     if (name === 'browse') loadRecipes();
-    if (name === 'add')    setupForm(null);
+    if (name === 'form')    setupForm(null);
 }
 
 // ── Browse / Search ────────────────────────────────────────
