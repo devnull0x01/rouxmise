@@ -53,7 +53,19 @@
                 <button onclick="showView('browse')">← Back</button>
                 <button onclick="editCurrentRecipe()">Edit</button>
                 <button onclick="deleteCurrentRecipe()" class="btn-danger">Delete</button>
+
+                <!--
+                # === MODIFIED 20260426 ===
+                # PRINT SHOPPING LIST FOR RECIPE IMMEDIATELY
+                # INSTEAD OF SHOWING THE LIST OF INGREDIENTS AND THEN
+                # PRINTING THE LIST 
                 <button onclick="showShoppingList()">Shopping List</button>
+                -->
+                <button onclick="printShoppingList()">Print Shopping List</button>
+                <!--
+                # === MODIFIED STOP ===
+                -->
+                
                 <button onclick="printCard()">Print Card</button>
             </div>
             <div id="recipe-detail"></div>
@@ -104,24 +116,7 @@
             </div>
         </div>
 
-        <!-- SHOPPING LIST VIEW -->
-        <div id="view-shopping" class="view hidden">
-            <div class="recipe-actions">
-                <button onclick="showView('recipe')">← Back to Recipe</button>
-
-                <!-- 
-                # === MODIFIED 20260426 ===
-                # PRINT LIST OF INGREDIENTS AND NOT ENTIRE RECIPE CARD
-                
-                <button onclick="window.print()">Print List</button>
-                -->
-                <button onclick="printShoppingList()">Print Shopping List</button>
-                <!--
-                # === MODIFIED 20260426 STOP ====
-                -->
-            </div>
-            <div id="shopping-content"></div>
-        </div>
+        
 
     </main>
 

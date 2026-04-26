@@ -251,32 +251,6 @@ async function deleteCurrentRecipe() {
     }
 }
 
-// ── Shopping List ──────────────────────────────────────────
-function showShoppingList() {
-    if (!currentRecipe) return;
-    const items = (currentRecipe.ingredients || '')
-        .split('\n')
-        .map(l => l.trim())
-        .filter(l => l.length > 0);
-
-    const content = document.getElementById('shopping-content');
-    content.innerHTML = `
-        <div class="shopping-content">
-            <h2>${esc(currentRecipe.name)}</h2>
-            <p class="sub">Shopping List · ${items.length} item${items.length !== 1 ? 's' : ''}</p>
-            <ul class="shopping-list">
-                ${items.map((item, i) => `
-                    <li id="shop-item-${i}" onclick="toggleShopItem(${i})">
-                        <input type="checkbox" onclick="event.stopPropagation(); toggleShopItem(${i})">
-                        <span>${esc(item)}</span>
-                    </li>
-                `).join('')}
-            </ul>
-        </div>
-    `;
-    showView('shopping');
-}
-
 function toggleShopItem(i) {
     const li  = document.getElementById('shop-item-' + i);
     const cb  = li.querySelector('input[type="checkbox"]');
@@ -285,24 +259,36 @@ function toggleShopItem(i) {
 }
 
 function printShoppingList() {
-    const content = document.getElementById('shopping-content').innerHTML;
+    if (!currentRecipe) return;
+    const items = (currentRecipe.ingredients || '')
+        .split('\n')
+        .map(l => l.trim())
+        .filter(l => l.length > 0);
+
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
         <!DOCTYPE html>
         <html>
         <head>
-            <title>Shopping List</title>
+            <title>Shopping List — ${esc(currentRecipe.name)}</title>
             <style>
                 body { font-family: Georgia, serif; padding: 2rem; color: #000; }
                 h2 { border-bottom: 2px solid #8b6914; padding-bottom: 0.5rem; color: #5a3e00; }
                 .sub { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
                 ul { list-style: none; padding: 0; }
-                li { padding: 0.4rem 0; border-bottom: 1px dotted #ccc; font-size: 1rem; }
-                input[type="checkbox"] { margin-right: 0.75rem; }
-                .no-print { display: none; }
+                li { padding: 0.4rem 0; border-bottom: 1px dotted #ccc; font-size: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+                input[type="checkbox"] { width: 1rem; height: 1rem; }
             </style>
         </head>
-        <body>${content}</body>
+        <body>
+            <h2>${esc(currentRecipe.name)}</h2>
+            <p class="sub">Shopping List · ${items.length} item${items.length !== 1 ? 's' : ''}</p>
+            <ul>
+                ${items.map(item => `
+                    <li><input type="checkbox"> <span>${esc(item)}</span></li>
+                `).join('')}
+            </ul>
+        </body>
         </html>
     `);
     printWindow.document.close();
