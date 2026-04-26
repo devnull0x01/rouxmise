@@ -49,11 +49,9 @@ header {
 }
 
 .logo {
-    font-size: 1.6rem;
-    color: var(--accent);
     cursor: pointer;
-    letter-spacing: 0.05em;
     user-select: none;
+    display: block;
 }
 
 nav {
