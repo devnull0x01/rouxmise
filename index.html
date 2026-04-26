@@ -108,7 +108,17 @@
         <div id="view-shopping" class="view hidden">
             <div class="recipe-actions">
                 <button onclick="showView('recipe')">← Back to Recipe</button>
+
+                <!-- 
+                # === MODIFIED 20260426 ===
+                # PRINT LIST OF INGREDIENTS AND NOT ENTIRE RECIPE CARD
+                
                 <button onclick="window.print()">Print List</button>
+                -->
+                <button onclick="printShoppingList()">Print Shopping List</button>
+                <!--
+                # === MODIFIED 20260426 STOP ====
+                -->
             </div>
             <div id="shopping-content"></div>
         </div>

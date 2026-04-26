@@ -284,6 +284,33 @@ function toggleShopItem(i) {
     li.classList.toggle('checked', cb.checked);
 }
 
+function printShoppingList() {
+    const content = document.getElementById('shopping-content').innerHTML;
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Shopping List</title>
+            <style>
+                body { font-family: Georgia, serif; padding: 2rem; color: #000; }
+                h2 { border-bottom: 2px solid #8b6914; padding-bottom: 0.5rem; color: #5a3e00; }
+                .sub { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
+                ul { list-style: none; padding: 0; }
+                li { padding: 0.4rem 0; border-bottom: 1px dotted #ccc; font-size: 1rem; }
+                input[type="checkbox"] { margin-right: 0.75rem; }
+                .no-print { display: none; }
+            </style>
+        </head>
+        <body>${content}</body>
+        </html>
+    `);
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+    printWindow.close();
+}
+
 // ── Print Card ─────────────────────────────────────────────
 function printCard() {
     if (!currentRecipe) return;
