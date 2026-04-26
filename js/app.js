@@ -14,7 +14,13 @@ function showView(name) {
     document.getElementById('view-' + name).classList.remove('hidden');
 
     if (name === 'browse') loadRecipes();
-    if (name === 'form')    setupForm(null);
+
+    // === MODIFIED 20260426 ===
+    // RESET 'currentRecipe' to CLEAR SO THAT
+    // 'isEdit' WON'T EQUAL TRUE
+    //if (name === 'form')    setupForm(null);
+    if (name === 'form') { currentRecipe = null; setupForm(null); }
+
 }
 
 // ── Browse / Search ────────────────────────────────────────
