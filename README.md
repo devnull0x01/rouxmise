@@ -3,9 +3,8 @@
 A self-hosted recipe manager. Enter, edit, delete, search, and print recipe cards.
 
 ## Stack
-- PHP 8.4 + SQLite
-- Vanilla HTML/CSS/JS (fully responsive)
-- Nginx
+LNPS — Linux, Nginx, PHP 8.4, SQLite
+A lightweight self-hosted stack with no external database server required. Vanilla HTML/CSS/JS frontend, fully responsive across desktop, tablet, and mobile.
 
 ## Features
 - Add, edit, delete recipes
